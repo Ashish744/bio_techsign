@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bio Technology | Sign Up</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <section class="hero-side">
+        <img src="logo.webp" alt="Bio Technology logo" class="hero-logo" />
+        <div class="hero-copy">
+          <span class="eyebrow">BIO TECHNOLOGY</span>
+          <h1>Create your access to the research portal.</h1>
+          <p>
+            Sign up with your details, choose your role, and join the Bio
+            Technology system to manage lab activity and research workflows.
+          </p>
+          <div class="hero-stats">
+            <div>
+              <strong>Fast</strong>
+              <span>Secure onboarding</span>
+            </div>
+            <div>
+              <strong>Smart</strong>
+              <span>Research-ready access</span>
+            </div>
+            <div>
+              <strong>Connected</strong>
+              <span>Team collaboration</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image"></div>
+      </section>
+
+      <section class="auth-side">
+        <div class="auth-card">
+          <div class="auth-head">
+            <img src="logo.webp" alt="Bio Technology logo" class="auth-logo" />
+            <p class="eyebrow">Sign Up</p>
+            <h2>Create your Bio Technology account</h2>
+            <p>
+              Enter your details below to activate access to the biotech portal.
+            </p>
+          </div>
+
+          <form id="signupForm">
+            <label for="role">Select Role</label>
+            <select id="role" name="role" required>
+              <option value="">Select Role</option>
+              <option value="Researcher">Researcher</option>
+              <option value="Lab Manager">Lab Manager</option>
+              <option value="Student">Student</option>
+              <option value="Analyst">Analyst</option>
+            </select>
+
+            <div class="role-options">
+              <button type="button" class="role-chip" data-role="Researcher">Researcher</button>
+              <button type="button" class="role-chip" data-role="Lab Manager">Lab Manager</button>
+              <button type="button" class="role-chip" data-role="Student">Student</button>
+              <button type="button" class="role-chip" data-role="Analyst">Analyst</button>
+            </div>
+
+            <label for="name">Full Name</label>
+            <input id="name" name="name" placeholder="Jane Doe" required />
+
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@biotechnology.com"
+              required
+            />
+
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Create a password"
+              required
+            />
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              required
+            />
+
+            <button type="submit" class="primary-btn">Create Account</button>
+          </form>
+
+          <div class="auth-footer">
+            <a href="index.html">Already have an account? Sign In</a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

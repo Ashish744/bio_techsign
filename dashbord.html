@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bio Technology | Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="dashboard-shell">
+      <aside class="dashboard-sidebar">
+        <div class="logo-block">
+          <img src="logo.webp" alt="Bio Technology" class="sidebar-logo" />
+          <div>
+            <p>Bio Technology</p>
+            <span>Research Portal</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a class="nav-item active" href="#">Dashboard</a>
+          <a class="nav-item" href="#projects">Projects</a>
+          <a class="nav-item" href="#analytics">Analytics</a>
+          <a class="nav-item" href="#schedule">Schedule</a>
+          <a class="nav-item" href="#settings">Settings</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a class="ghost-btn" href="index.html">Logout</a>
+        </div>
+      </aside>
+
+      <main class="dashboard-main">
+        <header class="dashboard-topbar">
+          <div>
+            <span class="eyebrow">RESEARCH PORTAL</span>
+            <h1 id="userGreeting">Hey, Bio Innovator</h1>
+            <p class="subtext">Your work is making a measurable impact in the lab.</p>
+          </div>
+          <div class="topbar-status">
+            <div class="profile-chip">
+              <div class="profile-avatar">BI</div>
+              <div>
+                <p id="dashboardRole">RESEARCHER</p>
+                <span>User</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="hero-banner">
+          <div>
+            <p class="eyebrow">Your Efforts Change Lives Every Day</p>
+            <h2>Track your programs, hours, and upcoming field visits.</h2>
+          </div>
+          <span class="status-badge">Active Researcher</span>
+        </section>
+
+        <section class="summary-grid" id="projects">
+          <article class="summary-card">
+            <div class="card-top">
+              <span>📁</span>
+              <p>Enrolled Programs</p>
+            </div>
+            <strong>02</strong>
+          </article>
+          <article class="summary-card">
+            <div class="card-top">
+              <span>📄</span>
+              <p>Pending Documents</p>
+            </div>
+            <strong>7 Files</strong>
+          </article>
+          <article class="summary-card">
+            <div class="card-top">
+              <span>⏱</span>
+              <p>Research Hours</p>
+            </div>
+            <strong>42.5 hrs</strong>
+          </article>
+          <article class="summary-card highlight-card">
+            <div class="card-top">
+              <span>📅</span>
+              <p>Next Field Visit</p>
+            </div>
+            <strong>Tomorrow 9:00</strong>
+          </article>
+        </section>
+
+        <section class="dashboard-grid" id="analytics">
+          <article class="activity-card pulse-card">
+            <h3>Lab Activity</h3>
+            <p>Live experiment progress and sensor insights.</p>
+            <div class="metric-row">
+              <div>
+                <strong>78%</strong>
+                <span>Equipment uptime</span>
+              </div>
+              <div>
+                <strong>14</strong>
+                <span>Ongoing tests</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="activity-card">
+            <h3>Project Pipeline</h3>
+            <p>Active milestones and upcoming review cycles.</p>
+            <ul>
+              <li>Genome sequencing review</li>
+              <li>Lab compliance checklist</li>
+              <li>Results presentation prep</li>
+            </ul>
+          </article>
+
+          <article class="activity-card">
+            <h3>Security Events</h3>
+            <p>Authorization changes and access history.</p>
+            <div class="metric-row">
+              <div>
+                <strong>4</strong>
+                <span>Alerts today</span>
+              </div>
+              <div>
+                <strong>98%</strong>
+                <span>Clear scans</span>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="details-section" id="schedule">
+          <article class="graph-card">
+            <h3>Experiment Timeline</h3>
+            <div class="graph-placeholder">
+              <span>Graph Placeholder</span>
+            </div>
+          </article>
+          <article class="tasks-card">
+            <h3>Upcoming Actions</h3>
+            <ul>
+              <li>Review sample data deck</li>
+              <li>Submit batch analysis report</li>
+              <li>Confirm next lab meeting</li>
+            </ul>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
