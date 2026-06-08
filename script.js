@@ -23,12 +23,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const signInForm = document.getElementById('signinForm');
+  const passwordInput = document.getElementById('password');
+  const passwordToggle = document.querySelector('.password-toggle');
+
+  if (passwordToggle && passwordInput) {
+    passwordToggle.addEventListener('click', () => {
+      const isHidden = passwordInput.getAttribute('type') === 'password';
+      passwordInput.setAttribute('type', isHidden ? 'text' : 'password');
+      passwordToggle.textContent = isHidden ? '🙈' : '👁';
+      passwordToggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    });
+  }
+
   if (signInForm) {
     signInForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const selectedRole = roleSelect?.value;
       const email = document.getElementById('email')?.value.trim();
-      const password = document.getElementById('password')?.value.trim();
+      const password = passwordInput?.value.trim();
 
       if (!email) {
         alert('Please enter your email address.');
@@ -48,6 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!password) {
         alert('Please enter your password.');
+        return;
+      }
+
+      if (password.length < 6) {
+        alert('Password must be at least 6 characters long.');
         return;
       }
 
@@ -98,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      alert('Account created successfully!');
       const encodedEmail = encodeURIComponent(email);
       const encodedRole = encodeURIComponent(selectedRole);
       window.location.href = `dashbord.html?role=${encodedRole}&email=${encodedEmail}`;

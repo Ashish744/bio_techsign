@@ -39,7 +39,7 @@
         <div class="auth-card">
           <div class="auth-head">
             <div class="auth-brand">STACKLY</div>
-            <p class="eyebrow">Sign In</p>
+            <p class="eyebrow">Login </p>
             <h2>Choose your role to continue</h2>
             <p>
               Select a role and enter your password to access the Bio Technology
@@ -70,17 +70,23 @@
               id="email"
               name="email"
               placeholder="you@biotechnology.com"
+              autocomplete="email"
               required
             />
 
             <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter your password"
-              required
-            />
+            <div class="password-field">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                minlength="6"
+                required
+              />
+              <button type="button" class="password-toggle" aria-label="Show password">👁</button>
+            </div>
+            <p class="field-note">Password must be at least 6 characters.</p>
 
             <button type="submit" class="primary-btn">Sign In</button>
           </form>

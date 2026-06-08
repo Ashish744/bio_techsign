@@ -30,6 +30,23 @@ body {
   overflow-x: hidden;
 }
 
+/* Global overflow guard: prevent any horizontal scroll caused by wide elements */
+html,
+body,
+.page-shell {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Allow main containers to shrink below their contents to avoid forcing overflow */
+.hero-side,
+.auth-side,
+.dashboard-main,
+.dashboard-sidebar,
+.auth-card {
+  min-width: 0;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -89,9 +106,11 @@ select {
 
 .hero-logo {
   display: block;
-  max-width: 180px;
+  max-width: 300px;
   width: auto;
   margin-bottom: 32px;
+  margin-left: -18px;
+  transform: translateX(-8px);
 }
 
 .auth-logo,
@@ -192,6 +211,7 @@ select {
   border: 1px solid rgba(255, 255, 255, 0.55);
   box-shadow: 0 40px 120px rgba(12, 34, 110, 0.16);
   backdrop-filter: blur(18px);
+  color: #1f2e50;
 }
 
 .error-page,
@@ -242,12 +262,26 @@ select {
 }
 
 .auth-brand {
-  font-size: 1.05rem;
+  font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #2a3b7e;
   margin-bottom: 18px;
+  margin-left: -6px;
+  display: inline-block;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+    color: #2a3b7e;
+  }
+  50% {
+    transform: translateX(-4px) scale(1.02);
+    color: #1f2e50;
+  }
 }
 
 .auth-head p,
@@ -255,7 +289,7 @@ label,
 .auth-footer p,
 .auth-footer a,
 .note {
-  color: #404f88;
+  color: #1f2e50;
 }
 
 form {
@@ -278,6 +312,37 @@ input {
   color: #0f1848;
   outline: none;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 3.75rem;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #4f64a8;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.password-toggle:hover {
+  color: #2a86ff;
+}
+
+.field-note {
+  margin: -6px 0 8px;
+  font-size: 0.85rem;
+  color: #5a6f9f;
 }
 
 select:hover,
@@ -349,7 +414,9 @@ input:focus {
 }
 
 .dashboard-shell {
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 320px 1fr;
+  width: 100%;
+  max-width: 100%;
 }
 
 .dashboard-sidebar {
@@ -359,44 +426,75 @@ input:focus {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  min-width: 0;
 }
 
 .logo-block {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  animation: brandEntrance 0.9s ease-out both;
 }
 
-.logo-mark {
-  width: 54px;
-  height: 54px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(180deg, rgba(42, 134, 255, 0.24), rgba(34, 63, 180, 0.18));
-  color: #d7e6ff;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.brand-title,
+.brand-subtitle {
+  margin: 0;
+  color: #ffffff;
+}
+
+.brand-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+.logo-block div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo-block p,
+.logo-block span {
+  margin: 0;
+  color: #ffffff;
 }
 
 .sidebar-logo {
-  width: 96px;
-  height: 96px;
-  border-radius: 22px;
+  width: 150px;
+  height: 150px;
+  min-width: 150px;
+  border-radius: 24px;
   object-fit: contain;
-}
-
-.logo-block p {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #f5f8ff;
 }
 
-.logo-block span {
-  font-size: 0.85rem;
-  color: #9fb6f5;
+@keyframes brandEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .sidebar-nav {
@@ -430,18 +528,20 @@ input:focus {
   border-radius: 18px;
   border: 1px solid rgba(42, 134, 255, 0.28);
   background: transparent;
-  color: #d7e6ff;
+  color: #ff4b4b;
+  text-decoration: none;
   cursor: pointer;
 }
 
 .ghost-btn:hover {
-  background: rgba(42, 134, 255, 0.14);
+  background: rgba(255, 75, 75, 0.08);
 }
 
 .dashboard-main {
   padding: 40px 44px;
   display: grid;
   gap: 32px;
+  min-width: 0;
 }
 
 .dashboard-topbar {
@@ -505,7 +605,8 @@ input:focus {
 
 .hero-banner {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
   padding: 30px 32px;
@@ -514,10 +615,47 @@ input:focus {
   border: 1px solid rgba(42, 134, 255, 0.16);
 }
 
+.hero-banner > div,
+.hero-banner .status-badge {
+  min-width: 0;
+}
+
+.status-badge {
+  white-space: nowrap;
+}
+
+.dashboard-main .hero-banner .eyebrow {
+  color: #0b1325;
+}
+
 .hero-banner h2 {
   margin: 12px 0 0;
   font-size: 1.8rem;
   color: #09123f;
+}
+
+.tasks-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.tasks-card ul li {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(234, 242, 255, 0.9);
+  border: 1px solid rgba(42, 134, 255, 0.12);
+  color: #0e1446;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.tasks-card ul li:hover {
+  background: rgba(42, 134, 255, 0.14);
+  border-color: rgba(42, 134, 255, 0.28);
+  transform: translateX(4px);
 }
 
 .status-badge {
@@ -670,6 +808,10 @@ input:focus {
   .details-section {
     grid-template-columns: 1fr;
   }
+
+  .hero-banner {
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 760px) {
@@ -678,6 +820,34 @@ input:focus {
   .dashboard-sidebar,
   .dashboard-main {
     padding: 24px 18px;
+  }
+
+  .dashboard-sidebar {
+    padding: 24px 18px;
+  }
+
+  .logo-block {
+    gap: 12px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .logo-block .brand-copy {
+    min-width: 0;
+    width: calc(100% - 110px);
+  }
+
+  .brand-title {
+    font-size: 0.88rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .sidebar-logo {
+    width: 110px;
+    height: 110px;
   }
 
   .hero-stats,
@@ -691,6 +861,15 @@ input:focus {
 
   .topbar-status {
     width: 100%;
+  }
+
+  .hero-banner {
+    padding: 24px 20px;
+    gap: 18px;
+  }
+
+  .hero-banner h2 {
+    font-size: 1.5rem;
   }
 }
 
