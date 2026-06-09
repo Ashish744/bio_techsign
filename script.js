@@ -125,6 +125,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const dashboardRole = document.getElementById('dashboardRole');
   const userGreeting = document.getElementById('userGreeting');
 
+  function updateActiveNav(hash) {
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach((link) => {
+      const target = link.getAttribute('href');
+      link.classList.toggle('active', target === hash);
+    });
+  }
+
+  const sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-item[href^="#"]');
+  sidebarLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const targetHash = link.getAttribute('href');
+      if (!targetHash || targetHash === '#') return;
+      event.preventDefault();
+      const targetEl = document.querySelector(targetHash);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        updateActiveNav(targetHash);
+        history.replaceState(null, '', targetHash);
+      }
+    });
+  });
+
+  window.addEventListener('hashchange', () => {
+    updateActiveNav(window.location.hash || '#dashboardTop');
+  });
+
   if (dashboardRole && userGreeting) {
     const params = getQueryParams();
     const role = params.role ? decodeURIComponent(params.role) : 'Researcher';
@@ -134,4 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
     dashboardRole.textContent = role.toUpperCase();
     userGreeting.textContent = `Hey, ${displayName} 👋`;
   }
+
+  updateActiveNav(window.location.hash || '#dashboardTop');
 });
