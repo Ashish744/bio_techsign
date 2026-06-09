@@ -64,7 +64,7 @@
             </div>
 
             <label for="name">Full Name</label>
-            <input id="name" name="name" placeholder="Jane Doe" required />
+            <input id="name" name="name" placeholder="Jane Doe" pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces" required />
 
             <label for="email">Email Address</label>
             <input
@@ -76,22 +76,29 @@
             />
 
             <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Create a password"
-              required
-            />
+            <div class="password-field">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password"
+                required
+              />
+              <button type="button" class="password-toggle" aria-label="Show password">👁</button>
+            </div>
+            <div class="field-note" id="passwordStrength"></div>
 
             <label for="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Confirm your password"
-              required
-            />
+            <div class="password-field">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm your password"
+                required
+              />
+              <button type="button" class="password-toggle" aria-label="Show password">👁</button>
+            </div>
 
             <button type="submit" class="primary-btn">Create Account</button>
           </form>
@@ -102,6 +109,19 @@
         </div>
       </section>
     </div>
+
+    <!-- Success Modal Pop-up -->
+    <div id="successModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-icon">✓</span>
+        </div>
+        <h2>Account Created Successfully!</h2>
+        <p>Your Bio Technology account has been created. You'll be redirected to the login page shortly.</p>
+        <button class="primary-btn" id="modalCloseBtn">Continue to Login</button>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>

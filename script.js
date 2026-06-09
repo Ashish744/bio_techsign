@@ -27,11 +27,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const passwordToggle = document.querySelector('.password-toggle');
 
   if (passwordToggle && passwordInput) {
-    passwordToggle.addEventListener('click', () => {
+    passwordToggle.addEventListener('click', (e) => {
+      e.preventDefault();
       const isHidden = passwordInput.getAttribute('type') === 'password';
       passwordInput.setAttribute('type', isHidden ? 'text' : 'password');
       passwordToggle.textContent = isHidden ? '🙈' : '👁';
       passwordToggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    });
+  }
+
+  // Handle ALL password toggles on signup page - fix by selecting them properly
+  const allPasswordToggles = document.querySelectorAll('.password-field .password-toggle');
+  allPasswordToggles.forEach((toggle) => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const parentField = toggle.closest('.password-field');
+      const passwordInput = parentField.querySelector('input');
+      if (passwordInput) {
+        const isHidden = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isHidden ? 'text' : 'password');
+        toggle.textContent = isHidden ? '🙈' : '👁';
+        toggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+      }
+    });
+  });
+
+  // Password strength validation for signup page
+  const signupPasswordInput = document.getElementById('password');
+  const passwordStrengthNote = document.getElementById('passwordStrength');
+  if (signupPasswordInput && passwordStrengthNote) {
+    signupPasswordInput.addEventListener('input', () => {
+      const passwordLength = signupPasswordInput.value.length;
+      if (passwordLength === 0) {
+        passwordStrengthNote.textContent = '';
+      } else if (passwordLength < 6) {
+        passwordStrengthNote.textContent = '⚠️ Password must be at least 6 characters';
+        passwordStrengthNote.style.color = '#ff6b6b';
+      } else if (passwordLength < 8) {
+        passwordStrengthNote.textContent = '✓ Password is acceptable (6+ characters)';
+        passwordStrengthNote.style.color = '#ffa500';
+      } else {
+        passwordStrengthNote.textContent = '✓ Password is strong';
+        passwordStrengthNote.style.color = '#4caf50';
+      }
     });
   }
 
@@ -74,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const signUpForm = document.getElementById('signupForm');
   if (signUpForm) {
     signUpForm.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -94,6 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      const nameRegExp = /^[A-Za-z\s]+$/;
+      if (!nameRegExp.test(name)) {
+        alert('Full name should only contain letters and spaces.');
+        return;
+      }
+
       if (!email) {
         alert('Please enter your email address.');
         return;
@@ -110,15 +153,37 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      if (password.length < 6) {
+        alert('Password must be at least 6 characters long.');
+        return;
+      }
+
       if (password !== confirmPassword) {
         alert('Passwords do not match.');
         return;
       }
 
-      alert('Account created successfully!');
-      const encodedEmail = encodeURIComponent(email);
-      const encodedRole = encodeURIComponent(selectedRole);
-      window.location.href = `dashbord.html?role=${encodedRole}&email=${encodedEmail}`;
+      // Show success modal
+      const successModal = document.getElementById('successModal');
+      if (successModal) {
+        successModal.classList.add('active');
+        
+        // Auto-redirect after 3 seconds
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 3000);
+      } else {
+        // Fallback if modal not found
+        window.location.href = 'index.html';
+      }
+    });
+  }
+
+  // Setup modal close button listener
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', () => {
+      window.location.href = 'index.html';
     });
   }
 
