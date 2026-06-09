@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const signInForm = document.getElementById('signinForm');
+  const signUpForm = document.getElementById('signupForm');
   const passwordInput = document.getElementById('password');
   const passwordToggle = document.querySelector('.password-toggle');
 
@@ -117,14 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (signUpForm) {
-    signUpForm.addEventListener('submit', (event) => {
+    signUpForm.addEventListener('submit', function(event) {
       event.preventDefault();
-      const selectedRole = roleSelect?.value;
-      const name = document.getElementById('name')?.value.trim();
-      const email = document.getElementById('email')?.value.trim();
-      const password = document.getElementById('password')?.value.trim();
-      const confirmPassword = document.getElementById('confirmPassword')?.value.trim();
+      
+      const selectedRole = document.getElementById('role').value;
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
 
+      // Validation
       if (!selectedRole) {
         alert('Please choose a role to sign up.');
         return;
@@ -167,19 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Show success modal
-      const successModal = document.getElementById('successModal');
-      if (successModal) {
-        successModal.classList.add('active');
-        
-        // Auto-redirect after 3 seconds
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 3000);
-      } else {
-        // Fallback if modal not found
+      // All validations passed - redirect to sign in
+      alert('Account created successfully!');
+      setTimeout(function() {
         window.location.href = 'index.html';
-      }
+      }, 500);
     });
   }
 
