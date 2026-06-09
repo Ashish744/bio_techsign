@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const passwordInput = document.getElementById('password');
   const passwordToggle = document.querySelector('.password-toggle');
 
-  if (passwordToggle && passwordInput) {
+  // Only handle signin page password toggle if we're on signin page
+  if (signInForm && passwordToggle && passwordInput) {
     passwordToggle.addEventListener('click', (e) => {
       e.preventDefault();
       const isHidden = passwordInput.getAttribute('type') === 'password';
@@ -36,21 +37,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Handle ALL password toggles on signup page - fix by selecting them properly
-  const allPasswordToggles = document.querySelectorAll('.password-field .password-toggle');
-  allPasswordToggles.forEach((toggle) => {
-    toggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      const parentField = toggle.closest('.password-field');
-      const passwordInput = parentField.querySelector('input');
-      if (passwordInput) {
-        const isHidden = passwordInput.getAttribute('type') === 'password';
-        passwordInput.setAttribute('type', isHidden ? 'text' : 'password');
-        toggle.textContent = isHidden ? '🙈' : '👁';
-        toggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
-      }
+  // Handle password toggles on signup page - separate from signin
+  if (!signInForm) {
+    // Only run on signup/other pages, not on signin
+    const allPasswordToggles = document.querySelectorAll('.password-field .password-toggle');
+    allPasswordToggles.forEach((toggle) => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const parentField = toggle.closest('.password-field');
+        const inputField = parentField.querySelector('input');
+        if (inputField) {
+          const isHidden = inputField.getAttribute('type') === 'password';
+          inputField.setAttribute('type', isHidden ? 'text' : 'password');
+          toggle.textContent = isHidden ? '🙈' : '👁';
+          toggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+        }
+      });
     });
-  });
+  }
 
   // Password strength validation for signup page
   const signupPasswordInput = document.getElementById('password');
