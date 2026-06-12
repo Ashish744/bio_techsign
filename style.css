@@ -354,6 +354,39 @@ input:focus {
   box-shadow: 0 0 0 6px rgba(53, 198, 255, 0.12);
 }
 
+.role-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.role-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(80, 97, 255, 0.22);
+  background: rgba(234, 242, 255, 0.78);
+  color: #17416d;
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.role-option:hover,
+.role-option.active {
+  transform: translateY(-2px);
+  background: rgba(81, 131, 255, 0.18);
+  border-color: rgba(53, 198, 255, 0.45);
+  color: #0f5fa8;
+}
+
 .role-options {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -953,8 +986,15 @@ input:focus {
     grid-template-columns: 1fr;
   }
 
+  .role-selector,
   .role-options {
     grid-template-columns: 1fr;
+  }
+
+  .role-option,
+  .role-chip {
+    padding: 12px 14px;
+    font-size: 0.95rem;
   }
 
   .topbar-status {

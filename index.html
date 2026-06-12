@@ -49,19 +49,12 @@
 
           <form id="signinForm">
             <label for="role">Select Role</label>
-            <select id="role" name="role" required>
-              <option value="">Select Role</option>
-              <option value="Researcher">Researcher</option>
-              <option value="Lab Manager">Lab Manager</option>
-              <option value="Student">Student</option>
-              <option value="Analyst">Analyst</option>
-            </select>
-
-            <div class="role-options">
-              <button type="button" class="role-chip" data-role="Researcher">Researcher</button>
-              <button type="button" class="role-chip" data-role="Lab Manager">Lab Manager</button>
-              <button type="button" class="role-chip" data-role="Student">Student</button>
-              <button type="button" class="role-chip" data-role="Analyst">Analyst</button>
+            <div id="role" class="role-selector" name="role" required>
+              <span class="role-option" data-value="">Select Role</span>
+              <span class="role-option" data-value="Researcher">Researcher</span>
+              <span class="role-option" data-value="Lab Manager">Lab Manager</span>
+              <span class="role-option" data-value="Student">Student</span>
+              <span class="role-option" data-value="Analyst">Analyst</span>
             </div>
 
             <label for="email">Email Address</label>

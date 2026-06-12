@@ -3,19 +3,20 @@ function getQueryParams() {
 }
 
 function setActiveRole(role) {
-  document.querySelectorAll('.role-chip').forEach((chip) => {
-    chip.classList.toggle('active', chip.dataset.role === role);
+  document.querySelectorAll('.role-option').forEach((option) => {
+    option.classList.toggle('active', option.dataset.value === role);
   });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const roleSelect = document.getElementById('role');
-  const roleChips = document.querySelectorAll('.role-chip');
+  const roleOptions = document.querySelectorAll('.role-option');
 
-  if (roleSelect && roleChips.length) {
-    roleChips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        const selectedRole = chip.dataset.role;
+  if (roleSelect && roleOptions.length) {
+    roleOptions.forEach((option) => {
+      option.addEventListener('click', () => {
+        const selectedRole = option.dataset.value;
+        roleSelect.setAttribute('data-selected', selectedRole);
         roleSelect.value = selectedRole;
         setActiveRole(selectedRole);
       });
@@ -81,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (signInForm) {
     signInForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      const selectedRole = roleSelect?.value;
+      const selectedRole = roleSelect?.value || roleSelect?.getAttribute('data-selected');
       const email = document.getElementById('email')?.value.trim();
       const password = passwordInput?.value.trim();
 
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     signUpForm.addEventListener('submit', function(event) {
       event.preventDefault();
       
-      const selectedRole = document.getElementById('role').value;
+      const selectedRole = document.getElementById('role').value || document.getElementById('role').getAttribute('data-selected');
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
